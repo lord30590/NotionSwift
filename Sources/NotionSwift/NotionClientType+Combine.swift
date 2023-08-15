@@ -41,7 +41,15 @@ extension NotionClientType {
             self.blockDelete(blockId: blockId, completed: promise)
         }
     }
-
+    
+    public func blockUpdate(
+        blockId: Block.Identifier,
+        value: UpdateBlock
+    )  -> AnyPublisher<ReadBlock, NotionClientError> {
+        convertToPublisher { promise in
+            self.blockUpdate(blockId: blockId, value: value, completed: promise)
+        }
+    }
     // MARK: - database
 
     public func database(
@@ -69,7 +77,7 @@ extension NotionClientType {
         }
     }
 
-    func databaseUpdate(
+    public func databaseUpdate(
         databaseId: Database.Identifier,
         request: DatabaseUpdateRequest
     ) -> AnyPublisher<Database, NotionClientError> {
